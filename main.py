@@ -68,7 +68,14 @@ print('==> Building model..')
 # net = ShuffleNetV2(1)
 # net = EfficientNetB0()
 # net = RegNetX_200MF()
-net = SimpleDLA()
+# net = SimpleDLA()
+
+# from models.smo_vgg import SparseVGG
+# net = SparseVGG('VGG11', l1_lambda=1e-5, sparsity_target=0.5)
+
+from models.smo_resnet import SparseResNet18
+net = SparseResNet18(l1_lambda=1e-4, sparsity_target=0.5)
+
 net = net.to(device)
 if device == 'cuda':
     net = torch.nn.DataParallel(net)
